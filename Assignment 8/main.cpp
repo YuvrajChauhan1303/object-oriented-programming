@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+/* Create a Class shape */
+
 class shape
 {
 protected:
@@ -19,6 +21,7 @@ public:
     }
 };
 
+/* Inherited the Class circle from base Class shape */
 class circle : public shape
 {
 private:
@@ -30,6 +33,7 @@ public:
         this->color = color;
         this->radius = radius;
     }
+    //Operator Overloading in circle class.
     double getArea()
     {
         return 3.14 * this->radius * this->radius;
@@ -41,6 +45,8 @@ public:
     }
 };
 
+/* Inherited the Class rectangle from base Class shape */
+
 class rectangle : public shape
 {
 private:
@@ -48,24 +54,35 @@ private:
     double breadth;
 
 public:
+    // Constructor
     rectangle(double length, double breadth, std::string color)
     {
         this->length = length;
         this->breadth = breadth;
         this->color = color;
     }
+    /*
+        We Need to show Operator Overloading in this.
+        I have used 3 different methods, with the same name, but variable-length parameters.
+        It is also showing operator Overriding as getArea() method is also declaread and defined in the base class -> shape.
+    */
+
     double getArea()
     {
         return this->breadth * this->length;
     }
-
+    /*
+        This getArea() method will simply use "this" pointer to access values and return the area.
+    */
     double getArea(double length)
     {
         this->length = length;
         this->breadth = length;
         return length * length;
     }
-
+    /*
+        This getArea() method will take the "length" as an input and change the values of both length and breadth, thus creating a shape.
+     */
     double getArea(double length, double breadth)
     {
         this->length = length;
@@ -73,6 +90,9 @@ public:
 
         return length * breadth;
     }
+    /*
+       This getArea() method will take both length and breadth as inputs, and change the respective values and provide the area.
+   */
 };
 
 int main()
@@ -100,10 +120,10 @@ int main()
 
     std::cout << "Enter Radius: ";
     std::cin >> radius;
-     std::cout << "Enter Color: ";
+    std::cout << "Enter Color: ";
     std::cin >> color;
 
-    circle * circle1 = new circle(radius, color);
+    circle *circle1 = new circle(radius, color);
 
     std::cout << "When NO parameter is Passed: " << circle1->getArea() << std::endl;
     std::cout << "When 1 Parameter is Passed ( circle1->getArea(10) ): " << circle1->getArea(10) << std::endl;
